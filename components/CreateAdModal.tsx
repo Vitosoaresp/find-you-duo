@@ -3,7 +3,7 @@ import * as Dialog from '@radix-ui/react-dialog';
 import * as Select from '@radix-ui/react-select';
 import * as ToggleGroup from '@radix-ui/react-toggle-group';
 import axios from 'axios';
-import { Check, GameController } from 'phosphor-react';
+import { Check, CircleNotch, GameController } from 'phosphor-react';
 import { FormEvent, useState } from 'react';
 import { Game } from '../pages';
 
@@ -13,19 +13,20 @@ export function CreateAdModal({ games }: Game) {
   const [weekDays, setWeekDays] = useState<string[]>([]);
   const [useVoiceChannel, setUseVoiceChannel] = useState<boolean>(false);
   const [gameSelectedAd, setGameSelectedAd] = useState<string | null>(null);
+  const [creatingAd, setCreatingAd] = useState(false);
 
   async function handleCreateAd(e: FormEvent) {
     e.preventDefault();
 
     const formData = new FormData(e.target as HTMLFormElement);
     const data = Object.fromEntries(formData);
-    console.log(data);
 
     if (!data.name || !gameSelectedAd || !data.hourStart) {
       return;
     }
 
     try {
+      setCreatingAd(true);
       await axios.post(`/api/games/${gameSelectedAd}/ads`, {
         name: data.name,
         yearsPlaying: Number(data.yearsPlaying),
@@ -36,6 +37,7 @@ export function CreateAdModal({ games }: Game) {
         useVoiceChannel: useVoiceChannel,
       });
       alert('Anuncio criado com sucesso!');
+      setCreatingAd(false);
     } catch (err) {
       alert('Erro ao criar um anuncio!');
       console.log(err);
@@ -236,9 +238,14 @@ export function CreateAdModal({ games }: Game) {
             </Dialog.Close>
             <button
               type='submit'
+              disabled={creatingAd}
               className='bg-violet-500 px-5 h-12 rounded-md font-semibold flex items-center gap-3 hover:bg-violet-600'
             >
-              <GameController className='w-6 h-6' />
+              {creatingAd ? (
+                <CircleNotch className='w-6 h-6 animate-spin' />
+              ) : (
+                <GameController className='w-6 h-6' />
+              )}
               Encontrar duo
             </button>
           </footer>
