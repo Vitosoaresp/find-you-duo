@@ -16,8 +16,8 @@ export function GameBanner(props: GameBannerProps) {
         loader={() => props.bannerUrl}
         src={props.bannerUrl}
         alt=''
-        width={150}
-        height={200}
+        width={200}
+        height={250}
       />
 
       <div className='w-full pt-16 pb-4 px-4 bg-game-gradient absolute bottom-0 left-0 right-0'>
