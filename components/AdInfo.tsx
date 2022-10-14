@@ -1,13 +1,13 @@
 interface AdInfoProps {
   label: string;
-  value: string;
+  children: React.ReactNode;
 }
 
-export function AdInfo({ label, value }: AdInfoProps) {
+export function AdInfo({ label, children }: AdInfoProps) {
   return (
     <div>
-      <p>{label}</p>
-      <p>{value}</p>
+      <p className='font-bold'>{label}</p>
+      <p>{children}</p>
     </div>
   );
 }
