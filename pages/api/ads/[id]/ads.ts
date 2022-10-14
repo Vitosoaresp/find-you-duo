@@ -16,6 +16,7 @@ export default async function getAdsByGameId(
       name: true,
       weekDays: true,
       useVoiceChannel: true,
+      discord: true,
       yearsPlaying: true,
       hourEnd: true,
       hourStart: true,
