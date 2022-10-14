@@ -7,8 +7,8 @@ interface GameBannerProps {
   bannerUrl: string;
   title: string;
   adsCount: number;
-  setGameIdSelected: Dispatch<SetStateAction<string>>;
-  setGameTitleSelected: Dispatch<SetStateAction<string>>;
+  setGameIdSelected: Dispatch<SetStateAction<string | undefined>>;
+  setGameTitleSelected: Dispatch<SetStateAction<string | undefined>>;
 }
 
 export function GameBanner(props: GameBannerProps) {
