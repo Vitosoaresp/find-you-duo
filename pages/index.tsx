@@ -8,6 +8,8 @@ import { useKeenSlider } from 'keen-slider/react';
 
 import { GameBanner } from '../components/GameBanner';
 
+import { useState } from 'react';
+import { AdsCard } from '../components/AdsCard';
 import { CreateAdBanner } from '../components/CreateAdBanner';
 import { CreateAdModal } from '../components/CreateAdModal';
 import logoImg from '../public/logo-nlw-esports.svg';
@@ -24,24 +26,26 @@ export interface Game {
 }
 
 const Home = ({ games }: Game) => {
+  const [gameIdSelected, setGameIdSelected] = useState<string>('');
+  const [gameTitleSelected, setGameTitleSelected] = useState('');
   const [ref] = useKeenSlider<HTMLDivElement>({
     loop: true,
     mode: 'free-snap',
     slides: {
       perView: 6,
-      spacing: 24,
+      spacing: 17,
     },
     breakpoints: {
       '(max-width: 1024px)': {
         slides: {
           perView: 4,
-          spacing: 24,
+          spacing: 17,
         },
       },
       '(max-width: 640px)': {
         slides: {
           perView: 2,
-          spacing: 24,
+          spacing: 17,
         },
       },
     },
@@ -62,19 +66,29 @@ const Home = ({ games }: Game) => {
         está aqui.
       </h1>
 
-      <div
-        className='keen-slider flex mt-14'
-        ref={ref}
-      >
-        {games.map((game) => (
-          <GameBanner
-            key={game.id}
-            bannerUrl={game.bannerUrl}
-            title={game.title}
-            adsCount={game._count.ads}
-          />
-        ))}
-      </div>
+      <Dialog.Root>
+        <div
+          className='keen-slider flex mt-14'
+          ref={ref}
+        >
+          {games.map((game) => (
+            <GameBanner
+              key={game.id}
+              id={game.id}
+              bannerUrl={game.bannerUrl}
+              title={game.title}
+              adsCount={game._count.ads}
+              setGameIdSelected={setGameIdSelected}
+              setGameTitleSelected={setGameTitleSelected}
+            />
+          ))}
+        </div>
+        <AdsCard
+          id={gameIdSelected}
+          gameTitle={gameTitleSelected}
+        />
+      </Dialog.Root>
+
       <Dialog.Root>
         <CreateAdBanner />
 
