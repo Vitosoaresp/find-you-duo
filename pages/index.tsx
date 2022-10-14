@@ -26,8 +26,10 @@ export interface Game {
 }
 
 const Home = ({ games }: Game) => {
-  const [gameIdSelected, setGameIdSelected] = useState<string>('');
-  const [gameTitleSelected, setGameTitleSelected] = useState('');
+  const [gameIdSelected, setGameIdSelected] = useState<string | undefined>();
+  const [gameTitleSelected, setGameTitleSelected] = useState<
+    string | undefined
+  >();
   const [ref] = useKeenSlider<HTMLDivElement>({
     loop: true,
     mode: 'free-snap',
