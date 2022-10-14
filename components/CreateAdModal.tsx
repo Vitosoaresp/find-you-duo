@@ -55,7 +55,7 @@ export function CreateAdModal({ games }: Game) {
 
         <form
           onSubmit={handleCreateAd}
-          className='mt-8 flex flex-col gap-4'
+          className='mt-8 flex flex-col gap-4 w-full'
         >
           <div className='flex flex-col gap-2'>
             <label
@@ -65,19 +65,19 @@ export function CreateAdModal({ games }: Game) {
               Qual o game?
             </label>
             <Select.Root onValueChange={setGameSelectedAd}>
-              <Select.Trigger className='bg-zinc-900 inline-flex items-center justify-center py-3 px-4 rounded text-sm placeholder:text-zinc-500 relative w-[400px]'>
+              <Select.Trigger className='bg-zinc-900 inline-flex items-center justify-center py-3 px-4 rounded text-sm placeholder:text-zinc-500 relative w-full'>
                 <Select.Value placeholder='Selecione o game que deseja jogar' />
                 <Select.Icon className='absolute right-6' />
               </Select.Trigger>
               <Select.Portal>
-                <Select.Content className='bg-zinc-900 w-[400px] rounded-md shadow'>
+                <Select.Content className='bg-zinc-900  w-full rounded-md shadow'>
                   <Select.ScrollUpButton />
-                  <Select.Viewport className='p-4 justify-center bg-zinc-900 w-full'>
+                  <Select.Viewport className='p-4 bg-zinc-900'>
                     {games.map((game) => (
                       <Select.Item
                         key={game.id}
                         value={game.id}
-                        className='flex items-center text-zinc-500 px-7 py-1 justify-center hover:bg-violet-500 hover:text-white transition-colors relative'
+                        className='flex items-center text-zinc-500 px-7 w-full py-1 justify-center hover:bg-violet-500 hover:text-white transition-colors relative'
                       >
                         <Select.ItemText>{game.title}</Select.ItemText>
                         <Select.ItemIndicator className='absolute left-0 w-6 flex items-center justify-center '>
